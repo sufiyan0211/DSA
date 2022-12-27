@@ -8,7 +8,7 @@ LinkList2 = 10-&gt;common
 common = 15-&gt;30-&gt;NULL
 <strong>Output: 1</strong>5
 <strong>Explanation:
-</strong><img alt="Y ShapedLinked List" class="aligncenter size-full wp-image-2753" src="../linked.jpg" style="height:334px; width:388px" title="Y ShapedLinked List"></span>
+</strong><img alt="Y ShapedLinked List" class="aligncenter size-full wp-image-2753" src="linked.jpg" style="height:334px; width:388px" title="Y ShapedLinked List"></span>
 </pre>
 
 
