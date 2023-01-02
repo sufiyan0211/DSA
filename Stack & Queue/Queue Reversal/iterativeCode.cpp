@@ -2,18 +2,20 @@
 using namespace std;
 
 
-void reverseRecursively(queue<int> &q) {
-    if(q.empty()) return;
-    int temp = q.front();
-    q.pop();
-    reverseRecursively(q);
-    q.push(temp);
-}
+
 
 queue<int> rev(queue<int> q)
 {
     // add code here.
-    reverseRecursively(q);
+    stack <int> s;
+    while(!q.empty()) {
+        s.push(q.front());
+        q.pop();
+    }
+    while(!s.empty()) {
+        q.push(s.top());
+        s.pop();
+    }
     return q;
 }
 
