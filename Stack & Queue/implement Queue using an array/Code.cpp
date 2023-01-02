@@ -1,79 +1,149 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// element should be deleted from front
+// And element should be added at last
 class Queue {
 private:
 	int size; // index of the last element of queue
 	int capacity;
 	int *arr;
+	int front;
+	int back;
 public:
 	Queue(int capacity) {
 		this->capacity = capacity;
 		arr = new int[capacity];
-		this->size = -1;
+		size = 0;
+		front = -1;
+		back = -1;
 	}
 	bool full() {
-		if(size == capacity-1) {
+		if(front == 0 && back == capacity-1) {
 			return true;
 		}
+		if(front == back + 1) return true;
 		return false;
 	}
 
 	bool empty() {
-		if(size == -1) {
+		if(front == -1 && back == -1) {
 			return true;
 		}
 		return false;
 	}
 
-	int front() {
-		return arr[0];
+	int getFront() {
+		if(empty() == true){
+			cout << "Queue is empty\n";
+			return -1;
+		}
+		return arr[front];
 	}
 
-	int back() {
-		return arr[size];
+	int getBack() {
+		if(empty() == true){
+			cout << "Queue is empty\n";
+			return -1;
+		}
+		return arr[back];
 	}
 
 	int pop() {
-		if(size == -1) {
+		if(empty() == true) {
 			cout << "Queue underflow\n";
 			return 0;
 		}
-		int x = arr[size];
-		size--;
-		return x;
+		int x = arr[front];
+		if(front == back) {
+			front = -1;
+			back = -1;
+			return x;
+		}
+		front += 1;
+		if(front == capacity) {
+			front = 0;
+			return x;
+		}
+ 		return x;
 	}
 
 	void push(int x) {
 		if(full()) {
-			cout << "Queue overflow\n";
+			cout << "#72 Queue overflow\n";
 			cout << x << " can't be entered into the Queue\n";
 			return;
 		}
-		size++;
-		arr[size] = x;
+		if(empty() == true) {
+			front = 0;
+			back = 0;
+			arr[back] = x;
+			return;
+		}
+		
+		if(back == capacity-1) {
+			back = 0;
+			if(front == 0) {
+				cout << "#86 Queue overflow\n";
+				cout << x << " can't be entered into the Queue\n";
+				return;
+			}
+			else {
+				arr[back] = x;
+				return;
+			}
+		}
+		
+		back += 1;
+		arr[back] = x;
 	}
 };
 
 int main() {
 	Queue q(5);
+
 	q.push(1);
 	q.push(2);
 	q.push(3);
 	q.push(4);
 	q.push(5);
+
 	q.push(6);
 	q.push(7);
 
-	while(!q.empty()) {
-		cout << "front: " << q.front() << endl;
-		cout << "back: " << q.back() << endl;
-		cout << endl;
+	q.pop();
+	q.pop();
 
-		q.pop();
-	}
+	cout << "Front : " << q.getFront() << endl;
+	cout << "Back : " << q.getBack() << endl;
+	cout << endl;
+
+	q.push(6);
+
+	cout << "Front : " << q.getFront() << endl;
+	cout << "Back : " << q.getBack() << endl;
+	cout << endl;
+
+	q.push(7);
+
+	cout << "Front : " << q.getFront() << endl;
+	cout << "Back : " << q.getBack() << endl;
+	cout << endl;
+
+	q.push(8);
 
 	q.pop();
+
+	cout << "Front : " << q.getFront() << endl;
+	cout << "Back : " << q.getBack() << endl;
+	cout << endl;
+
+	q.push(8);
+
+	cout << "Front : " << q.getFront() << endl;
+	cout << "Back : " << q.getBack() << endl;
+	cout << endl;
+
 	
 	return 0;
 }
