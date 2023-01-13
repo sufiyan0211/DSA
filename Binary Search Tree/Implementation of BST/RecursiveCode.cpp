@@ -49,9 +49,8 @@ int main() {
 	int arr[] = {60,30, 90,20,40,80,110,100,120,130};
 	int n = 10; // total nodes 
 
-	Node *root = insert(NULL, arr[0]);
-
-	for(int i=1;i<n;i++) {
+	Node *root = NULL;
+	for(int i=0;i<n;i++) {
 		root = insert(root, arr[i]);
 	}
 

@@ -57,6 +57,24 @@ Node* insert(Node* root, int Key) {
     return root;
 }
 
+bool search(Node* root, int x) {
+    if(root == NULL){
+    	return false;
+    }
+    while(root != NULL) {
+    	if(x == root->data) {
+    		return true;
+    	}
+        else if(x > root->data) {
+            root = root->right;
+        }
+        else {
+            root = root->left;
+        }
+    }
+    return false;
+}
+
 int main() {
 	int arr[] = {60,30, 90,20,40,80,110,100,120,130};
 	int n = 10; // total nodes 
@@ -65,8 +83,11 @@ int main() {
 	for(int i=0;i<n;i++) {
 		root = insert(root, arr[i]);
 	}
-
-
+	cout << "Printing BST in Preorder Traversal\n";
 	printTree(root); cout << endl;
+
+	cout << "search value 120\n";
+	cout << search(root, 120) << endl;
+
 	return 0;
 }
