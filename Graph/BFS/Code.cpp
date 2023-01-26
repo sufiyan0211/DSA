@@ -7,20 +7,33 @@ void addEdge(vector<vector<int>> &adj, int v, int u) {
 	adj[v].push_back(u);
 }
 
-void dfs(vector<vector<int>> &adj, vector<int> &ans, int s, vector<bool> &visited) {
-	ans.push_back(s);
+void bfs(vector<vector<int>> &adj, vector<int> &ans, int s, vector<bool> &visited) {
+	
 	visited[s] = true;
-	for(auto v: adj[s]) {
-		if(visited[v] == false) {
-			dfs(adj, ans, v, visited);
+
+	queue<int> q;
+	q.push(s);
+
+	while(!q.empty()) {
+		int u = q.front();
+		ans.push_back(u);
+		q.pop();
+
+		for(auto v: adj[u]) {
+			if(visited[v] == false) {
+				q.push(v);
+				visited[v] = true;
+			}
 		}
 	}
+	
 }
 
 
 int main() {
 	int v = 4;
 	vector<vector<int>> adj(v);
+
 	addEdge(adj, 0, 1);
 	addEdge(adj, 0, 2);
 
@@ -35,14 +48,15 @@ int main() {
 	addEdge(adj, 3, 1);
 	addEdge(adj, 3, 2);
 
+
 	vector<int> ans;
 	vector<bool> visited(v, false);
 
 	// undirected Graph
-	// No Breaks
+	// May be Disconnected
 	for(int s=0;s<v;s++) {
 		if(visited[s] == false) {
-			dfs(adj, ans, s, visited);
+			bfs(adj, ans, s, visited);
 		}
 	}
 
