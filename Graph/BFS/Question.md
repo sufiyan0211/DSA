@@ -1,1 +1,1 @@
-<img title="Graph" alt="Alt text" src="../boo.svg">
+<img title="Graph" alt="Alt text" src="../Graph.png">
