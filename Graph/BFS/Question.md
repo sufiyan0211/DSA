@@ -1,0 +1,1 @@
+<img title="Graph" alt="Alt text" src="../boo.svg">
