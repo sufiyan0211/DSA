@@ -5,3 +5,4 @@
 - [GFG Placment 100](https://practice.geeksforgeeks.org/batch/placement100-batch-2/track/DSASP-Graph/video/MTgzOA%3D%3D) This is for <strong>Intution</strong>
 
 - [GFG Placment 100](https://practice.geeksforgeeks.org/batch/placement100-batch-2/track/DSASP-Graph/video/MTgzOA%3D%3D) This is for code Explanation
+- [GFG Solution](https://ide.geeksforgeeks.org/IF0I3NIQI3)
