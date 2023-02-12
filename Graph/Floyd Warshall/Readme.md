@@ -7,5 +7,5 @@
 
 #### Notes
 
-<img src="Floyd Warshall Algo.png" alt="" width=200px height=200px> 
-<img src="Floyd Warshall negative Cycle detect.png" alt="" width=200px height=200px> 
+<img src="Floyd Warshall Algo.png" alt="" width=450px height=450px> 
+<img src="Floyd Warshall negative Cycle detect.png" alt="" width=450px height=450px> 
