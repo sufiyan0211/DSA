@@ -3,3 +3,6 @@
 
 #### Question Link
 - [GFG](https://practice.geeksforgeeks.org/problems/number-of-islands/)
+
+#### Notes
+<img src="Number of island II.png" alt="" width="700" height="700">
