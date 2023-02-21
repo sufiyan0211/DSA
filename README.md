@@ -1,2 +1,2 @@
 # DSA
-My DSA practice
+My DSA practice to be come a perfect coder.
