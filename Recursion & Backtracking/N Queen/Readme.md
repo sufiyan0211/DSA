@@ -25,4 +25,4 @@ N-Queen Problem
 <h3> Note: </h3>
 
 * Code1.cpp and Code2.cpp are solution according to GFG Question requirements.
-* Code3.cpp Solution for according to leetcode Question requirements.
+* Code3.cpp Solution is according to leetcode Question requirements.
