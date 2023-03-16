@@ -3,4 +3,4 @@ Subset II
 
 |Question|Video|
 |-|-|
-|[LeetCode](https://leetcode.com/problems/subsets-ii/description/)|[Striver YT](https://youtu.be/RIn3gOkbhQE)|
+|[LeetCode](https://leetcode.com/problems/subsets-ii/description/)|[Fraz](https://youtu.be/u40eYbmT9zg)|
