@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 void heapify(int arr[], int n, int i) {
@@ -45,14 +47,12 @@ int main() {
 		cout << x << " ";
 	} cout << "\n\n";
 
-
 	heapSort(arr, n);
 
 	cout << "Array after sorting:\n";
 	for(auto x: arr) {
 		cout << x << " ";
 	} cout << "\n\n";
-
 
 	return 0;
 }
