@@ -1,6 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
-
 
 class MaxHeap {
 public:
@@ -8,9 +9,9 @@ public:
 	int size;
 	int capacity;
 
-	MaxHeap(int capacity, int size) {
+	MaxHeap(int capacity) {
 		this->capacity = capacity;
-		this->size = size;
+		this->size = 0;
 		arr = new int[capacity];
 	}
 
@@ -40,9 +41,8 @@ public:
 		}
 	}
 
-	void heapify(int i, int &largest) {
-		largest = i;
-
+	void heapify(int i) {
+		int largest = i;
 		int rt = right(i);
 		int lt = left(i);
 
@@ -55,63 +55,41 @@ public:
 
 		if(largest != i) {
 			swap(arr[largest], arr[i]);
-			heapify(largest, largest);
+			heapify(largest);
 		}
 	}
 
-	void delet() {
-		// This means we need to delete the top element
-		arr[0] = INT_MIN;
-		int largest = 0;
-		heapify(0, largest);
-		swap(arr[size-1], arr[largest]);
-		size--;
+	int extractMin() {
+        if(size == 0) {
+            cout << "Heap is empty so can't be deleted anything from Heap: ";
+            return -1;
+        }
+        if(size == 1) {
+            cout << "This the last element of Heap which is deleted: ";
+            size--;
+            return arr[size];
+        }
+        int ans = arr[0];
+        size--;
+		swap(arr[0], arr[size]);
+		heapify(0);
+        return ans;
 	}
 };
 
 int main() {
-	MaxHeap maxHeap(1000, 0);
+	MaxHeap maxHeap(11);
 
-	maxHeap.insert(50);
-	maxHeap.insert(60);
-	maxHeap.insert(40);
-	cout << "Top: " << maxHeap.top() << endl;
+	maxHeap.insert(3);
+	maxHeap.insert(2);
+	maxHeap.insert(15);
+	maxHeap.insert(20);
 
-	/*
-	cout << "Printing arr\n";
-	for(int i=0;i<3;i++) {
-		cout << i << ": " << maxHeap.arr[i] << endl;
-	}cout << endl;
-	*/
-	
+    cout << maxHeap.extractMin() << endl;
+    cout << maxHeap.extractMin() << endl;
+    cout << maxHeap.extractMin() << endl;
+    cout << maxHeap.extractMin() << endl;
+    cout << maxHeap.extractMin() << endl;
 
-	
-
-	cout << "Deleting....\n";
-	maxHeap.delet();
-	cout << "Top: " << maxHeap.top() << endl;
-
-	/*
-	cout << "Printing arr\n";
-	for(int i=0;i<3;i++) {
-		cout << i << ": " << maxHeap.arr[i] << endl;
-	}cout << endl;
-	*/
-
-	cout << "Deleting....\n";
-	maxHeap.delet();
-	cout << "Top: " << maxHeap.top() << endl;
-
-	/*
-	cout << "Printing arr\n";
-	for(int i=0;i<3;i++) {
-		cout << i << ": " << maxHeap.arr[i] << endl;
-	}cout << endl;
-	*/
-
-
-	
-
-	
 	return 0;
 }

@@ -1,6 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
-
 
 class MinHeap {
 public:
@@ -8,9 +9,9 @@ public:
 	int size;
 	int capacity;
 
-	MinHeap(int capacity, int size) {
+	MinHeap(int capacity) {
 		this->capacity = capacity;
-		this->size = size;
+		this->size = 0;
 		arr = new int[capacity];
 	}
 
@@ -40,9 +41,8 @@ public:
 		}
 	}
 
-	void heapify(int i, int &smallest) {
-		smallest = i;
-
+	void heapify(int i) {
+		int smallest = i;
 		int rt = right(i);
 		int lt = left(i);
 
@@ -55,62 +55,40 @@ public:
 
 		if(smallest != i) {
 			swap(arr[smallest], arr[i]);
-			heapify(smallest, smallest);
+            heapify(smallest);
 		}
 	}
 
-	void delet() {
-		// This means we need to delete the top element
-		arr[0] = INT_MAX;
-		int smallest = 0;
-		heapify(0, smallest);
-		swap(arr[size-1], arr[smallest]);
-		size--;
+	int extractMax() {
+        if(size == 0) {
+            cout << "Heap is empty so can't be deleted anything from Heap: ";
+            return -1;
+        }
+        if(size == 1) {
+            cout << "This the last element of Heap which is deleted: ";
+            size--;
+            return arr[size];
+        }
+		int ans = arr[0];
+        size--;
+        swap(arr[0], arr[size]);
+        heapify(0);
+        return ans;
 	}
 };
 
 int main() {
-	MinHeap minHeap(1000, 0);
+    MinHeap minHeap(11);
 
-	minHeap.insert(50);
-	minHeap.insert(60);
-	minHeap.insert(40);
+    minHeap.insert(3);
+    minHeap.insert(2);
+    minHeap.insert(15);
+    minHeap.insert(20);
 
-	/*
-	cout << "Printing arr\n";
-	for(int i=0;i<3;i++) {
-		cout << i << ": " << minHeap.arr[i] << endl;
-	}cout << endl;
-	*/
-	
-
-	cout << "Top: " << minHeap.top() << endl;
-
-	cout << "Deleting....\n";
-	minHeap.delet();
-	cout << "Top" << minHeap.top() << endl;
-
-	/*
-	cout << "Printing arr\n";
-	for(int i=0;i<3;i++) {
-		cout << i << ": " << minHeap.arr[i] << endl;
-	}cout << endl;
-	*/
-
-	cout << "Deleting....\n";
-	minHeap.delet();
-	cout << "Top: " << minHeap.top() << endl;
-
-	/*
-	cout << "Printing arr\n";
-	for(int i=0;i<3;i++) {
-		cout << i << ": " << minHeap.arr[i] << endl;
-	}cout << endl;
-	*/
-
-
-	
-
-	
+    cout << minHeap.extractMax() << endl;
+    cout << minHeap.extractMax() << endl;
+    cout << minHeap.extractMax() << endl;
+    cout << minHeap.extractMax() << endl;
+    cout << minHeap.extractMax() << endl;
 	return 0;
 }
