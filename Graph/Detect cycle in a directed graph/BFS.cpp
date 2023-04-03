@@ -2,8 +2,8 @@
 using namespace std;
 
 
-void addEdge(vector<int> adj[], int v, int u) {
-    adj[v].push_back(u);
+void addEdge(vector<int> adj[], int u, int v) {
+    adj[u].push_back(v);
 }
 
 
@@ -54,7 +54,6 @@ int main() {
     addEdge(adj, 1, 3);
     addEdge(adj, 2, 1);
     addEdge(adj, 3, 2);
-    addEdge(adj, 3, 4);
         
 
     // undirected Graph
@@ -71,5 +70,3 @@ int main() {
 
     return 0;
 }
-
-
