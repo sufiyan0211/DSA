@@ -2,68 +2,60 @@
 using namespace std;
 
 
-void addEdge(vector<vector<int>> &adj, int v, int u) {
-    adj[v].push_back(u);
-}
-
-
-
-void dfs(vector<vector<int>> &adj, vector<bool> &visited, stack<int> &s, int i) {
-    visited[i] = true;
-    
-    for(int u: adj[i]) {
-        if(visited[u] == false){
-            dfs(adj, visited, s, u);
-        }
+void dfs(int u, stack<int> &st, vector<vector<pair<int, int>>> &adj, 
+vector<bool> &visited) {
+    visited[u] = true;
+    for(auto v: adj[u]) {
+        int adjNode = v.first;
+        if(visited[adjNode] == false) 
+            dfs(adjNode, st, adj, visited);
     }
-    
-    s.push(i);
+    st.push(u);
 }
+    
+ vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
+    // code here
 
-vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
-        // code here
-    map<pair<int, int>, int> weight;
-    vector<vector<int>> adj(N);
-    
-    
+    // create Weightd graph from edges
+    // Space Complexity O(N*M) & Time complexity O(M)
+    vector<vector<pair<int, int>>> adj(N);
     for(int i=0;i<M;i++) {
-        weight[make_pair(edges[i][0],edges[i][1])] = edges[i][2];
-        addEdge(adj, edges[i][0], edges[i][1]);
+        int node = edges[i][0];
+        int adjNode = edges[i][1];
+        int weight = edges[i][2];
+        adj[node].push_back({adjNode, weight});
     }
-    
-    
+
+    stack<int> st;
     vector<bool> visited(N, false);
-    stack<int> s;
-    
-    
+
     for(int i=0;i<N;i++) {
         if(visited[i] == false) {
-            dfs(adj, visited, s, i);
+            dfs(i, st, adj, visited);
         }
     }
-    
-    vector<int> dist(N, INT_MAX);
+
+
+    vector<int> dist(N, 1e8);
     dist[0] = 0;
-    
-    while(!s.empty()) {
-        int u = s.top();
-        s.pop();
-        
-        if(dist[u] == INT_MAX) continue;
-        
-        for(int v: adj[u]) {
-            if(dist[v] > dist[u]+weight[make_pair(u,v)]){
-                dist[v] = dist[u]+weight[make_pair(u,v)];
+
+    while(!st.empty()) {
+        int node = st.top();
+        st.pop();
+        for(auto v: adj[node]) {
+            int adjNode = v.first;
+            int weight = v.second;
+            if(dist[adjNode] > dist[node]+weight) {
+                dist[adjNode] = dist[node]+weight;
             }
         }
     }
-    
+
     for(int i=0;i<N;i++) {
-        if(dist[i] == INT_MAX) {
+        if(dist[i] == 1e8) {
             dist[i] = -1;
         }
     }
-    
     return dist;
 }
 
