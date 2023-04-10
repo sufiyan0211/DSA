@@ -56,6 +56,8 @@ vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
         }
     }
     
+    
+    // merging the mails based on their ultimate parent
     vector<string> mergeMail[n];
     for(auto it: mapMailNode) {
         string mail = it.first;
