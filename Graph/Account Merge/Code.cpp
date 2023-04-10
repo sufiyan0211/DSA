@@ -41,6 +41,9 @@ vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
     int n = accounts.size();
     DisjoinSet ds(n);
     unordered_map<string, int> mapMailNode;
+    
+    // mapping mails<String> to nodes<int> and if the there is repeating mail found 
+    // Then add it Disjoint set
     for(int i=0;i<n;i++) {
         for(int j = 1;j<accounts[i].size();j++) {
             string mail = accounts[i][j];
