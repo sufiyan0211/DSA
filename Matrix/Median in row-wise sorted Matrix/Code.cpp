@@ -19,6 +19,7 @@ int median(vector<vector<int> > &matrix, int R, int C){
     int N = R*C;
     while(low <= high) {
         int mid = (low+high) >> 1;
+        // count of numbers which is lesser than equal to mid
         int count = 0;
         for(int i=0;i<R;i++) {
             count += binarySearchOnEachRow(matrix[i], C, mid);
