@@ -12,34 +12,40 @@ public:
 	}
 };
 
-vector<int> zigZagTraversal(Node *root) {
-	vector<int> ans;
-	queue<Node *> q;
-	q.push(root);
-	bool leftToRight = true;
-	while(!q.empty()) {
-	    int width = q.size();
-	    vector<int> level(width);
-	    for(int i=0;i<width;i++) {
-	        root = q.front();
-	        q.pop();
-	        
-	        int index = (leftToRight) ? i : width-i-1;
-	        level[index] = root->key;
-	        
-	        if(root->left) {
-	            q.push(root->left);
-	        }
-	        if(root->right) {
-	            q.push(root->right);
+vector<int> zigZagTraversal(Node* root) {
+    // Code here
+    vector<int> ans;
+    queue<Node *> q;
+    q.push(root);
+    bool leftToRight = true;
+    	
+    while(!q.empty()) {
+    	   int width = q.size();
+    	   vector<int> levelNodes;
+    	   while(width--) {
+    	       Node *curr = q.front();
+    	       levelNodes.push_back(curr->data);
+    	       q.pop();
+    	       if(curr->left) {
+    	           q.push(curr->left);
+    	       }
+    	       if(curr->right) {
+    	           q.push(curr->right);
+    	       }
+    	   }
+    	   if(leftToRight) {
+	           for(auto nodeData: levelNodes) {
+	               ans.push_back(nodeData);
+	           }
+	       }
+	    else {
+	        for(int it=levelNodes.size()-1; it>=0; it--){
+	             ans.push_back(levelNodes[it]);
 	        }
 	    }
 	    leftToRight = !leftToRight;
-	    for(auto ele : level) {
-	        ans.push_back(ele);
-	    }
-	}
-	return ans;
+    	}
+    return ans;
 }
 /* Binary Tree in the input
 			10
