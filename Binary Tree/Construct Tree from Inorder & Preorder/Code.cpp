@@ -9,19 +9,16 @@ private:
         return -1;
     }
     Node *recursiveTree(int in[],int pre[], int n, int &preOrderIndex,
-                        int startInOrder, int endInOrder, unordered_map<int, deque<int>> &mp) {
+                        int startInOrder, int endInOrder, unordered_map<int, queue<int>> &mp) {
         if(startInOrder > endInOrder) {
             return NULL;
         }
-        int element = pre[preOrderIndex++];
-        Node *root = new Node(element);
+        Node *root = new Node(pre[preOrderIndex++]);
 
-        int positionInInorder = mp[element].front();
-        mp[element].pop_back();
+        int positionInInorder = mp[root->data].front();
+        mp[root->data].pop();
 
-        if(mp[element].size() == 0) {
-            mp.erase(element);
-        }
+//         if(mp[element].size() == 0) mp.erase(element);
 
         root->left = recursiveTree(in, pre, n, preOrderIndex, startInOrder, positionInInorder-1, mp);
         root->right = recursiveTree(in, pre, n, preOrderIndex, positionInInorder+1, endInOrder, mp);
@@ -33,11 +30,10 @@ public:
     {
         // Code here
         int preOrderIndex = 0;
-        unordered_map<int, deque<int>> mp;
+        unordered_map<int, queue<int>> mp;
         for(int i=0;i<n;i++) {
-            mp[in[i]].push_back(i);
+            mp[in[i]].push(i);
         }
-        Node *root = recursiveTree(in, pre, n, preOrderIndex, 0, n-1, mp);
-        return root;
+        return recursiveTree(in, pre, n, preOrderIndex, 0, n-1, mp);
     }
 };
