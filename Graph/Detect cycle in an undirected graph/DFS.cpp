@@ -16,7 +16,7 @@ bool dfs(vector<vector<int>> &adj, vector<bool> &visited, int src, int parent) {
 			bool isCyclePresent = dfs(adj, visited, v, src);
 			if(isCyclePresent) return true;
 		}
-		else if(v != parent) {
+		else if(v != parent) { // means if 'v' is visited but 'v' is not the parent of src
 			return true;
 		}
 	}
