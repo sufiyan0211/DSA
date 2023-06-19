@@ -36,7 +36,7 @@ public:
 	}
 
     int getSize() {
-        return size;
+        return size+1;
     }
 
 	void insert(int val) {
