@@ -2,8 +2,8 @@ class Solution {
 public:
     int kthElement(int arr1[], int arr2[], int n, int m, int k) {
         if (n > m) return kthElement(arr2, arr1, m, n, k);
-        int low = max(0, k - m);
-        int high = min(k, n);
+        int low = max(0, k - m); // think if k > m
+        int high = min(k, n); // think if n > k
 
         while (low <= high) {
             int cut1 = (low + high) >> 1;
