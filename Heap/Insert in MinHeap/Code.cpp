@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 
@@ -8,10 +8,10 @@ private:
 	int size;
 	int capacity;
 public:
-	MinHeap(int capacity, int size) {
-		this->capacity = capacity;
-		this->size = size;
-		arr = new int[capacity];
+	MinHeap() {
+		this->capacity = 1e9;
+		this->size = -1;
+		arr = new int[this->capacity];
 	}
 
 	int left(int i) {
@@ -26,28 +26,46 @@ public:
 		return (i-1)/2;
 	}
 
+    bool isEmpty() {
+        return (size == -1);
+    }
+
 	int top() {
+        if(isEmpty()) throw std::underflow_error("heap is empty");
 		return arr[0];
 	}
 
-	void insert(int x) {
-		size++;
-		arr[size-1] = x;
-		int i = size-1;
-		while(arr[i] < arr[parent(i)]) {
-			swap(arr[i], arr[parent(i)]);
-			i = parent(i);
-		}
+    int getSize() {
+        return size;
+    }
+
+	void insert(int val) {
+        if(size >= capacity) throw std::overflow_error("Heap is overflow");
+        if(isEmpty()) {
+            arr[++size] = val;
+            return;
+        }
+
+        size++;
+        arr[size] = val;
+        int i = size;
+        while(arr[i] < arr[parent(i)]) {
+            swap(arr[i], arr[parent(i)]);
+            i = parent(i);
+        }
 	}
 };
 
 int main() {
-	MinHeap minHeap(1000, 0);
-	minHeap.insert(50);
+	MinHeap minHeap;
+
+    minHeap.insert(50);
 	cout << minHeap.top() << endl;
-	minHeap.insert(60);
+
+    minHeap.insert(60);
 	cout << minHeap.top() << endl;
-	minHeap.insert(40);
+
+    minHeap.insert(40);
 	cout << minHeap.top() << endl;
 	
 	return 0;
