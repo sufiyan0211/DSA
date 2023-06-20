@@ -57,10 +57,10 @@ pair<Node*, Node*> findPnD(Node *root, int val) {
 		if(curr->data == val) {
 			curr = curr->left;
 		}
-		else if(curr->data > val) {
+		else if(val < curr->data) {
 			curr = curr->left;
 		}
-		else if(curr->data < val) {
+		else if(val > curr->data) {
 			predecessor = curr;
 			curr = curr->right;
 		}
@@ -72,11 +72,11 @@ pair<Node*, Node*> findPnD(Node *root, int val) {
 		if(curr->data == val) {
 			curr = curr->right;
 		}
-		else if(curr->data > val) {
+		else if(val < curr->data) {
 			successor = curr;
 			curr = curr->left;
 		}
-		else if(curr->data < val) {
+		else if(val > curr->data) {
 			curr = curr->right;
 		}
 	}
