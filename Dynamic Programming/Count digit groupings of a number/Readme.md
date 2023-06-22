@@ -9,5 +9,5 @@ Count digit groupings of a number
 
 
 <h3>Note:</h3>
-<img src="1.PNG" alt="" height="400px" width="300px"></br>
-<img src="2.PNG" alt="" height="400px" width="300px">
+<img src="1.PNG" alt="" height="700px" width="600px"></br>
+<img src="2.PNG" alt="" height="700px" width="600px">
