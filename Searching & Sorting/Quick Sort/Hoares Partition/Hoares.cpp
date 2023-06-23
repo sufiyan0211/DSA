@@ -2,26 +2,22 @@
 #include <vector>
 using namespace std;
 
-int hoaresPartition(vector<int> &arr, int l, int r) {
-    int i = l-1;
-    int j = r+1;
+int partition(vector<int> &arr, int l, int r) {
     int pivot = arr[l];
-    while(true) {
-        do {
-            i++;
-        } while(arr[i] < pivot);
-        do {
-            j--;
-        } while (arr[j] > pivot);
-        if(i >= j) return j;
-        swap(arr[i], arr[j]);
+    int i = l;
+    int j = r;
+    while(i < j) {
+        while(arr[i] <= pivot) i++;
+        while(arr[j] > pivot) j--;
+        if(i<j) swap(arr[i], arr[j]);
     }
-    return -1;
+    swap(arr[l], arr[j]);
+    return j;
 }
 
 void quickSort(vector<int> &arr, int l, int r) {
     if(l < r) {
-        int pivot = hoaresPartition(arr, l, r);
+        int pivot = partition(arr, l, r);
         quickSort(arr, l, pivot-1);
         quickSort(arr, pivot+1, r);
     }
