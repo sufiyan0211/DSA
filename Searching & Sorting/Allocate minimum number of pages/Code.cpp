@@ -1,72 +1,49 @@
-#include <bits/stdc++.h>
-using namespace std;
+//User function template in C++
 
-
-int allocationPossible(int arr[], int n, int barrier, int totalStudents) {
-        int student = 1;
-        int pagesAlloted = 0;
-        
-        for(int i=0;i<n;i++) {
-            if(arr[i] > barrier) {
-                return false;
-            }
-            if(pagesAlloted+arr[i] > barrier) {
-                student++;
-                pagesAlloted = arr[i];
-                if(student > totalStudents) return false;
+class Solution
+{
+public:
+    int countStudent(int A[], int N, int mid) {
+        int students = 1;
+        int pagesPerStudent = 0;
+        for(int i=0; i<N; i++) {
+            if(pagesPerStudent + A[i] <= mid) {
+                pagesPerStudent += A[i];
             }
             else {
-                pagesAlloted += arr[i];
+                students++;
+                pagesPerStudent = A[i];
             }
         }
-        
-        return true;
+        return students;
     }
-    
-    int findPages(int arr[], int n,  int totalStudents) 
+
+    int findPages(int A[], int N, int M)
     {
-        //code here
-        if(totalStudents > n) return -1;
-        
-        int sumOfPagesOfAllBooks = 0;
-        for(int i=0;i<n;i++) {
-            sumOfPagesOfAllBooks += arr[i];
+        if(M > N) return -1;
+        int sum = 0;
+        int maxElement = A[0];
+        for(int i=0;i<N;i++) {
+            maxElement = max(maxElement, A[i]);
+            sum += A[i];
         }
-        
-        int low = arr[0];
-        int high = sumOfPagesOfAllBooks;
-        
-        int res = -1;
+
+        int low = maxElement;
+        int high = sum;
+
         while(low <= high) {
-            int mid = (low + high) >> 1;
-            
-            if(allocationPossible(arr, n, mid, totalStudents)) {
-                res = mid;
-                high = mid - 1;
-            }
-            else {
+            int mid = (low+high)/2;
+            int studentCount = countStudent(A, N, mid);
+            /*
+            studentCount is more at 'low' and it is lesser at 'high'
+            */
+            if(studentCount > M) {
                 low = mid + 1;
             }
+            else {
+                high = mid - 1;
+            }
         }
-        
-        return res;
+        return low;
     }
-
-
-
-
-int main() {
-    int n;
-    cin>>n;
-    int A[n];
-    for(int i=0;i<n;i++){
-        cin>>A[i];
-    }
-    int m;
-    cin>>m;
-
-    cout << findPages(A, n, m) << endl;
-
-return 0;
-}
-
+};
