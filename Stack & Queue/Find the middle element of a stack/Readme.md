@@ -6,8 +6,7 @@ Find the middle element of a stack
 ||[GFG](https://www.geeksforgeeks.org/design-a-stack-with-find-middle-operation/)|
 
 
-
 |Type|Complexity|
 |----|----------|
+|Doubly Linked List|Time: O(1) and Space: O(n)|
 |Auxilary stack + Double Ended Queue|Time: O(1) and Space: O(n)|
-|Linked List + Double Ended Queue|Time: O(1) and Space: O(n)|
