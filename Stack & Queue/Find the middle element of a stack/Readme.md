@@ -10,3 +10,7 @@ Find the middle element of a stack
 |----|----------|
 |Doubly Linked List|Time: O(1) and Space: O(n)|
 |Auxilary stack + Double Ended Queue|Time: O(1) and Space: O(n)|
+
+
+#### Solution for Auxilary stack + Double Ended Queue
+![image](Imgg.jpg)
