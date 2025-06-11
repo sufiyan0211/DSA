@@ -1,25 +1,25 @@
-class Solution{
+class Solution {
 public:
-    void insertAtBottom(stack<int> &s, int topper) {
-        if(s.empty() == true) {
-            s.push(topper);
+    void insertAtBottom(stack<int> &st, int element) {
+        if(st.empty()) {
+            st.push(element);
+            return;
         }
-        else {
-            int nextTopper = s.top();
-            s.pop();
-            insertAtBottom(s, topper);
-            s.push(nextTopper);
-        }
+        int topp = st.top();
+        st.pop();
+        // recursive call
+        insertAtBottom(st, element);
+        st.push(topp);
     }
-    void Reverse(stack<int> &s){
-        
-        if(s.empty()) return;
-        
-        int topper = s.top();
-        s.pop();
-        
-        Reverse(s);
-        
-        insertAtBottom(s, topper);
+    
+    void Reverse(stack<int> &st) {
+        if(st.empty()) {
+            return;
+        }
+        int topp = st.top();
+        st.pop();
+        // recursive call
+        Reverse(st);
+        insertAtBottom(st, topp);
     }
 };
