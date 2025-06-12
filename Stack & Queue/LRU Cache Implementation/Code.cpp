@@ -1,84 +1,91 @@
 class Node {
-public:
+    public:
     int key;
     int value;
     Node *prev;
     Node *next;
-    Node (int key, int value) {
+    
+    Node(int key, int value) {
         this->key = key;
         this->value = value;
+        prev = NULL;
+        next = NULL;
     }
 };
 
+
 class LRUCache {
-private:
-    int capacity;
-    Node *head, *tail;
-    unordered_map<int, Node*> mp;
-public:
-    void deleteNode(Node *target) {
-        Node *nodeAfterTarget = target->next;
-        Node *nodeBeforeTarget = target->prev;
-
-        nodeAfterTarget->prev = nodeBeforeTarget;
-        nodeBeforeTarget->next = nodeAfterTarget;
-
-        // free(target);
-    }
-
-    Node* addNodeAfterHead(int key, int value) {
-        Node *node = new Node(key, value);
-
-        Node *nodeAfterHead = head->next;
-
-        head->next = node;
-        node->prev = head;
-        node->next = nodeAfterHead;
-        nodeAfterHead->prev = node;
-        return node;
-    }
-
-    LRUCache(int capacity) {
-        this->capacity = capacity;
-
-        this->head = new Node(-1, -1);
-        this->tail = new Node(-1, -1);
-
-        this->head->next = tail;
-        this->tail->prev = head;
+  private:
+  int capacity;
+  Node *head, *tail;
+  unordered_map<int, Node*> um;
+  int size;
+  
+  
+  void deleteNode(Node *targetNode) {
+      Node *nodeBeforeTarget = targetNode->prev;
+      Node *NodeAfterTarget = targetNode->next;
+      
+      nodeBeforeTarget->next = NodeAfterTarget;
+      NodeAfterTarget->prev = nodeBeforeTarget;
+  }
+  
+  void addNodeAtStart(Node *newNode) {
+      Node *nodeBeforeHead = head->prev;
+      
+      newNode->prev = nodeBeforeHead;
+      nodeBeforeHead->next = newNode;
+      
+      newNode->next = head;
+      head->prev = newNode;
+  }
+  
+  public:
+    LRUCache(int cap) {
+        // code here
+        capacity = cap;
+        head = new Node(-1, -1);
+        tail = new Node(-1, -1);
+        
+        head->prev = tail;
+        tail->next = head;
     }
 
     int get(int key) {
-        if(mp.find(key) != mp.end()) {
-            Node *target = mp[key];
-            int val = target->value;
-            mp.erase(key);
-
-            deleteNode(target);
-            Node *node = addNodeAfterHead(key, val);
-            mp[key] = node;
-
-            return val;
+        // code here
+        if(um.find(key) == um.end()) {
+            return -1;
         }
-        return -1;
+        
+        Node *targetNode = um[key];
+        
+        deleteNode(targetNode);
+        addNodeAtStart(targetNode);
+        
+        return targetNode->value;
     }
 
+        
     void put(int key, int value) {
-        // update the value if key already exist in the cache
-        if(mp.find(key) != mp.end()) {
-            Node *target = mp[key];
-            mp.erase(key);
-            deleteNode(target);
-            Node *node = addNodeAfterHead(key, value);
-            mp[key] = node;
+        // if key is already present in unordered_set us
+        if(um.find(key) != um.end()) {
+            Node *updateNode = um[key];
+            
+            deleteNode(updateNode);
+            
+            Node *newNode = new Node(key, value);
+            addNodeAtStart(newNode);
+            um[key] = newNode;
+            return;
         }
-        else {
-            Node *node = addNodeAfterHead(key, value);
-            mp[key] = node;
-            if(mp.size() > capacity) {
-                mp.erase(tail->prev->key);
-                deleteNode(tail->prev);
-            }
+        
+        Node *newNode = new Node(key, value);
+        um[key] = newNode;
+        addNodeAtStart(newNode);
+
+        if(um.size() > capacity) {
+            um.erase(tail->next->key);
+            deleteNode(tail->next);
         }
     }
 };
