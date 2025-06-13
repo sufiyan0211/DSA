@@ -1,0 +1,12 @@
+<div class="undefined "><div class="problems_header_content__o_4YA"><div class="problems_header_content__title__L2cB2 g-mb-0"><h3 class="g-m-0">The Celebrity Problem</h3><div style="padding-top: 2px;"><div class="sprint_sprint_popup_container__zCU0K"><i aria-hidden="true" class="bookmark outline icon"></i></div><div class="sprint_sprint_modal_container_mobile__09_Vr"><i aria-hidden="true" class="bookmark outline icon"></i></div></div></div><i id="bug_1" aria-hidden="true" class="bug icon"></i></div><div class="problems_header_description__t_8PB"><span>Difficulty: <strong>Medium</strong></span><span>Accuracy: <strong>38.33%</strong></span><span>Submissions: <strong>316K+</strong></span><span>Points: <strong>4</strong></span><span class="problems_label__MY7nU">Average Time: <strong>30m</strong></span></div><div class="ui divider"></div><div><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 14pt;">A celebrity is a person who is known to all but&nbsp;<strong>does not know</strong>&nbsp;anyone at a party. A party is being organized by some people. A square matrix&nbsp;<strong>mat[][]&nbsp;</strong>(n*n)&nbsp;is used to represent people at the party such that if an element of <strong>row i and column j is set to 1</strong> it means <strong>ith person knows jth person</strong>.&nbsp;You need to return the <strong>index of the celebrity</strong> in the party, if the celebrity does not exist, return&nbsp;<strong>-1</strong>.</span></p>
+<p><span style="font-size: 14pt;"><strong>Note:</strong>&nbsp;Follow <strong>0-based </strong>indexing.</span></p>
+<p><span style="font-size: 14pt;"><strong>Examples:</strong></span></p>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>mat[][] = [[1, 1, 0], [0, 1, 0], [0, 1, 1]]
+<strong>Output:</strong> 1
+<strong>Explanation: </strong>0th and 2nd person both know 1st person. Therefore, 1 is the celebrity person. </span></pre>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>mat[][] = [[1, 1], [1, 1]]
+<strong>Output:</strong> -1
+<strong>Explanation: </strong>Since both the people at the party know each other. Hence none of them is a celebrity person.</span></pre>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>mat[][] = [[1]]
+<strong>Output:</strong> 0</span></pre>
+<p><span style="font-size: 14pt;"><strong>Constraints:</strong><br>1 &lt;= mat.size()&lt;= 1000<br>0 &lt;= mat[i][j]&lt;= 1<br>mat[i][i] == 1</span></p></div></div></div></div></div></div>
