@@ -5,14 +5,13 @@ public:
     vector<long long> nextLargerElement(vector<long long> arr, int n){
         // Your code here
         stack <long long> s;
-        s.push(arr[n-1]);
         vector<long long> ans(n);
-        ans[n-1] = -1;
-        for(int i=n-2;i>=0;i--) {
+
+        for(int i=n-1; i>=0; i--) {
             while(!s.empty() && s.top() <= arr[i]) {
                 s.pop();
             }
-            ans[i] = (s.empty()) ? -1 : s.top();
+            ans[i] = s.empty() ? -1 : s.top();
             s.push(arr[i]);
         }
         return ans;
