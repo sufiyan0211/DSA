@@ -1,76 +1,74 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-class QueueStack{
+
+
+template<typename T>
+class Stack {
 private:
-    queue<int> q1;
-    queue<int> q2;
+    queue<T> q1;
+    queue<T> q2;
+
+
 public:
-    void push(int);
-    int pop();
+    Queue() {
+    }
+
+    ~Queue() {
+        q1 = NULL;
+        q2 = NULL;
+    }
+
+    void push(T item) {
+        //Enqueue x to q2
+        q2.push(item);
+
+        //One by one dequeue everything from q1 and enqueue to q2.
+        while(!q1.empty()) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+
+        //Swap the names of q1 and q2
+        swap(q1, q2);
+    }
+
+    T pop() {
+        if(isEmpty()) {
+            throw underflow_error("Stack is already empty");
+        }
+        T item = q1.front();
+        q1.pop();
+
+        return item;
+    }
+
+    bool isEmpty() {
+        return q1.empty();
+    }
+
+    T top() {
+        if(isEmpty()) {
+            throw underflow_error("Queue is empty");
+        }
+        return front->data;
+    }
+
 };
 
+int main() {
+    Stack<int> st;
 
-int main()
-{
-    QueueStack *qs = new QueueStack();
+    st.push(11);
+    st.push(12);
+    st.push(13);
+    st.push(14);
+    st.push(15);
 
-    int Q;
-    cin>>Q;
-    while(Q--){
-        int QueryType=0;
-        cin>>QueryType;
-        // QueryType = 1 means push operation
-        if(QueryType==1)
-        {
-            int a;
-            cin>>a;
-            qs->push(a);
-        }
-        // QueryType = 2 means pop operation
-        else if(QueryType==2){
-            cout<<qs->pop()<<" ";
+    st.pop();
 
-        }
-    }
-    cout<<endl;
+    cout << q.top() << endl;
+
+
+    return 0;
 }
-
-
-//Function to push an element into stack using two queues.
-void QueueStack :: push(int x)
-{
-    // Your Code
-    while(!q1.empty()) {
-        q2.push(q1.front());
-        q1.pop();
-    }
-    
-    q1.push(x);
-    
-    while(!q2.empty()) {
-        q1.push(q2.front());
-        q2.pop();
-    }
-}
-
-//Function to pop an element from stack using two queues. 
-int QueueStack :: pop()
-{
-    // Your Code      
-    if(q1.empty() == true) return -1;
-    int x = q1.front();
-    q1.pop();
-    return x;
-}
-
-
-
-
-/*
-i/p:
-    5
-    1 2 1 3 2 1 4 2
-o/p:
-     3 4
-*/
