@@ -1,10 +1,8 @@
 class Solution {
     // return height
     int diameterUtil(Node* root, int &d) {
-        if(root == NULL)
-        {
-            return 0;
-        }
+        if(root == NULL) return 0;
+        
         int lh = diameterUtil(root->left, d);
         int rh = diameterUtil(root->right, d);
         
