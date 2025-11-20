@@ -16,7 +16,7 @@ private:
         return s;
     }
 public:
-    /*This function returns true if the tree contains
+    /* This function returns true if the tree contains
     a duplicate subtree of size 2 or more else returns false */
     int dupSub(Node *root) {
         // code here
