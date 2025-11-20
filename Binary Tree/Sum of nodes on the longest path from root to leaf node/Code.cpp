@@ -1,39 +1,39 @@
-class Solution
-{
-private:
-    // pair<height, sum>
-    pair<int, int> recursiveTree(Node *root) {
-        if(root == NULL) {
-            return make_pair(0,0);
-        }
-        if(root->left == NULL && root->right == NULL) {
-            return  make_pair(1, root->data);
-        }
-
-        pair<int, int> left = recursiveTree(root->left);
-        pair<int, int> right = recursiveTree(root->right);
-
+class Solution {
+  public:
+    // {height, sum}
+    pair<int, int> sumTree(Node *root) {
+        if(root == NULL) return make_pair(0, 0);
+        
+        if(root->left == NULL && root->right == NULL) return make_pair(1, root->data);
+        
         pair<int, int> ans;
-        if(left.first ==  right.first) {
-            ans.first = 1+left.first; // 1+right.first
-            ans.second = max(left.second, right.second) + root->data;
+        
+        pair<int, int> leftSubtree = sumTree(root->left);
+        pair<int, int> rightSubtree = sumTree(root->right);
+        
+        ans.first = 1 + max(leftSubtree.first, rightSubtree.first);
+        
+        if (leftSubtree.first > rightSubtree.first) {
+            ans.second = root->data + leftSubtree.second;
         }
-        else if(left.first > right.first) {
-            ans.first = 1+left.first;
-            ans.second = left.second + root->data;
+        else if (rightSubtree.first > leftSubtree.first) {
+            ans.second = root->data + rightSubtree.second;
         }
-        else {
-            ans.first = 1+right.first;
-            ans.second = right.second + root->data;
+        else { // leftSubtree.first == rightSubtree.first
+            if (leftSubtree.second > rightSubtree.second) {
+                ans.second = root->data + leftSubtree.second;
+            }
+            else {
+                ans.second = root->data + rightSubtree.second;
+            }
         }
-
+        
         return ans;
     }
-public:
-
-    int sumOfLongRootToLeafPath(Node *root)
-    {
-        //code here
-        return recursiveTree(root).second;
+    
+    
+    int sumOfLongRootToLeafPath(Node *root) {
+        // code here
+        return sumTree(root).second;
     }
 };
