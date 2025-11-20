@@ -7,7 +7,7 @@ vector<int> diagonal(Node *root) {
     while (!q.empty()) {
         Node *curr = q.front();
         q.pop();
-        while (curr) {
+        while (curr != NULL) {
             ans.push_back(curr->data);
             if (curr->left) {
                 q.push(curr->left);
