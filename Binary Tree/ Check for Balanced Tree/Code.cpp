@@ -12,8 +12,8 @@ public:
 
         pair<int, bool> ans;
         ans.first = 1+max(left.first, right.first);
-        ans.second = ( (left.second == true) && (right.second == true)
-                       && (abs(left.first - right.first) <= 1) ) ? true : false;
+        ans.second = (left.second == true && right.second == true)
+                       && (abs(left.first - right.first) <= 1);
 
         return ans;
     }
