@@ -3,6 +3,7 @@ public:
     void combinationSum(vector<int>& candidates, int target, 
                         int index, vector<int> path, int sum,
                         vector<vector<int>> &ans) {
+        // base condition
         if (index == candidates.size()) {
             if (sum == target) {
                 ans.push_back(path);
