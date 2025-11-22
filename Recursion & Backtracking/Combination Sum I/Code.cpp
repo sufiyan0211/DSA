@@ -1,30 +1,33 @@
 class Solution {
-private: 
-    void backtrack(int currIdx, int currSum,  int &target,
-        vector<int> vi, vector<vector<int>> &ans,
-        vector<int> &nums) {
-            
-        if(currIdx == nums.size()) {
-            if(currSum == target) {
-                ans.push_back(vi);
+public:
+    void combinationSum(vector<int>& candidates, int target, 
+                        int index, vector<int> path, int sum,
+                        vector<vector<int>> &ans) {
+        if (index == candidates.size()) {
+            if (sum == target) {
+                ans.push_back(path);
             }
             return;
         }
 
-        if(nums[currIdx]+currSum <= target) {
-            vi.push_back(nums[currIdx]);
-            backtrack(currIdx, currSum+nums[currIdx], target, vi, ans, nums);
-            vi.pop_back();
+        // pick
+        if (sum+candidates[index] <= target) {
+            sum += candidates[index];
+            path.push_back(candidates[index]);
+            combinationSum(candidates, target, index, path, sum, ans);
+            sum -= candidates[index];
+            path.pop_back();
         }
-        
-        backtrack(currIdx+1, currSum, target, vi, ans, nums);
-    }
-public:
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<int> vi;
-        vector<vector<int>> ans;
 
-        backtrack(0, 0, target, vi, ans, candidates);
+        // not pick
+        combinationSum(candidates, target, index+1, path, sum, ans);
+    }
+
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> path;
+        vector<vector<int>> ans;
+        combinationSum(candidates, target, 0, path, 0, ans);
         return ans;
     }
 };
