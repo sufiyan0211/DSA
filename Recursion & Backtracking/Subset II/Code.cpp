@@ -1,29 +1,24 @@
 class Solution {
-private:
-    void solve(int i, int n, vector<int> &arr,
-           vector<vector<int>> &ans,
-           vector<int> vi) {
-        if(i == n) {
-            ans.push_back(vi);
-            return;
+public:
+void subsets(int currentIndex, vector<int>& nums,
+                 vector<int> path, vector<vector<int>> &ans) {
+        
+        ans.push_back(path);
+
+        for(int i = currentIndex; i<nums.size(); i++) {
+            // to avoid duplicates in the ans
+            if (i>currentIndex && nums[i] == nums[i-1]) continue;
+            path.push_back(nums[i]);
+            subsets(i+1, nums, path, ans);
+            path.pop_back();
         }
 
-        // Pick
-        vi.push_back(arr[i]);
-        solve(i+1, n, arr, ans, vi);
-        vi.pop_back();
-
-        // notPick
-        while(i+1 < n && arr[i] == arr[i+1]) i++;
-        solve(i+1, n, arr, ans, vi);
     }
-public:
-    vector<vector<int>> subsetsWithDup(vector<int>& arr) {
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int> path;
         vector<vector<int>> ans;
-        vector<int> vi;
-        int n = arr.size();
-        sort(arr.begin(), arr.end());
-        solve(0, n, arr, ans, vi);
+        sort(nums.begin(), nums.end());
+        subsets(0, nums, path, ans);
         return ans;
     }
 };
