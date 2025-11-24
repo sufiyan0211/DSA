@@ -11,6 +11,8 @@ void backtrack(int currIdx, vector<int> vi,
 
     for(int i=currIdx;i<candidates.size();i++) {
         if(i>currIdx && candidates[i] == candidates[i-1] ) continue;
+        // we can break as candidates is sorted and 
+        // On and  after candidates[i] every element will be greater than target
         if(candidates[i] > target) break;
         vi.push_back(candidates[i]);
         backtrack(i+1, vi, ans, target-candidates[i], candidates);
