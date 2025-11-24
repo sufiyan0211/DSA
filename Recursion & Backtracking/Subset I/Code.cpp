@@ -4,6 +4,7 @@ private:
     vector<vector<int>> &ans, vector<int> &nums) {
         ans.push_back(vi);
         for(int i=currIdx;i<nums.size();i++) {
+            // to avoid duplicates in the ans
             if(i>currIdx && nums[i] == nums[i-1]) continue;
             vi.push_back(nums[i]);
             backtrack(i+1, vi, ans, nums);
