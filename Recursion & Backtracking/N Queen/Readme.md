@@ -15,6 +15,11 @@ N-Queen Problem
 |Code3.cpp|O(n<sup>2</sup>)|
 
 
+### Gist
+1. Every row has one Queen
+2. Every column has one Queen
+3. No Queen attack other Queen
+
 <hr>
 <h3> Notes: </h3>
 <img src="N queeen 1.png" alt="" width="700" height="700"> 
