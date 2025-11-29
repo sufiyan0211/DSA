@@ -1,45 +1,53 @@
 class Solution {
-private:
-void backtrack(int currCol, vector<string> &board, int n, vector<vector<string>>& ans,
-vector<int> &leftDiagonalUpper, vector<int>& leftDiagonalDown, vector<int>& leftHorizontal
-) {
-    if(currCol == n) {
-        ans.push_back(board);
-    }
-
-    for(int currRow = 0; currRow<n; currRow++) {
-        if( board[currRow][currCol] == '.' && 
-        leftHorizontal[currRow] == 0 &&
-        leftDiagonalUpper[n-1 + currCol-currRow] == 0 &&
-        leftDiagonalDown[currRow + currCol] == 0
-        ) {
-            board[currRow][currCol] = 'Q';
-            leftHorizontal[currRow] = 1;
-            leftDiagonalUpper[n-1 + currCol-currRow] = 1;
-            leftDiagonalDown[currRow + currCol] = 1;
-
-            backtrack(currCol+1, board, n, ans, leftDiagonalUpper, leftDiagonalDown, leftHorizontal);
-
-            board[currRow][currCol] = '.';
-            leftHorizontal[currRow] = 0;
-            leftDiagonalUpper[n-1 + currCol-currRow] = 0;
-            leftDiagonalDown[currRow + currCol] = 0;
-        }
-    }
-}
-
 public:
-    vector<vector<string>> solveNQueens(int n) {
-        vector<string> board(n);
-        string s(n, '.');
-        for(int i=0;i<n;i++) {
-            board[i] = s;
+    void solveNQueens(int currCol, int n, 
+        vector<string> &board,
+        vector<int> &horizontalLeft, 
+        vector<int> &diagonallyLeftUpward, 
+        vector<int> &diagonallyLeftDownward, 
+        vector<vector<string>> &ans) {
+
+        // base condition
+        if(currCol == n) {
+            ans.push_back(board);
+            return;
         }
-        vector<int> leftHorizontal(n, 0);
-        vector<int> leftDiagonalUpper(2*n - 1, 0);
-        vector<int> leftDiagonalDown(2*n - 1, 0);
+        
+
+        for(int currRow=0; currRow<n; currRow++) {
+            if(horizontalLeft[currRow] == 0 &&
+                diagonallyLeftUpward[n-1 + currCol-currRow] == 0 &&
+                diagonallyLeftDownward[currRow + currCol] == 0 ) {
+
+                    board[currRow][currCol] = 'Q';
+                    horizontalLeft[currRow] = 1;
+                    diagonallyLeftUpward[n-1 + currCol-currRow] = 1;
+                    diagonallyLeftDownward[currRow + currCol] = 1;
+
+                    solveNQueens(currCol+1, n, board, horizontalLeft, 
+                                diagonallyLeftUpward, diagonallyLeftDownward, ans);
+
+
+                    board[currRow][currCol] = '.';
+                    horizontalLeft[currRow] = 0;
+                    diagonallyLeftUpward[n-1 + currCol-currRow] = 0;
+                    diagonallyLeftDownward[currRow + currCol] = 0;
+
+
+               }
+        }
+
+    }
+
+    vector<vector<string>> solveNQueens(int n) {
+        string s(n, '.');
+        vector<string> board(n, s);
+        
         vector<vector<string>> ans;
-        backtrack(0, board, n, ans, leftDiagonalUpper, leftDiagonalDown, leftHorizontal);
+        vector<int> horizontalLeft(n, 0), diagonallyLeftUpward(2*n, 0), diagonallyLeftDownward(2*n, 0);
+        
+        solveNQueens(0, n, board, horizontalLeft, diagonallyLeftUpward, diagonallyLeftDownward, ans);
+
         return ans;
     }
 };
