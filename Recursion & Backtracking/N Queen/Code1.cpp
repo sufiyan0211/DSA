@@ -3,13 +3,15 @@ private:
     bool isSafe(int currRow, int currCol, vector<vector<int>> &board, int n) {
         int dupRow = currRow;
         int dupCol = currCol;
-        
+
+        // traversing: horizontally towards left
         while(currCol >=0) {
             if(board[currRow][currCol] == 1) return false;
             currCol--;
         }
         
         currCol = dupCol;
+         // traversing: diagonally towards left-upward
         while(currRow >=0 && currCol >= 0) {
             if(board[currRow][currCol] == 1) return false;
             currRow--;
@@ -18,6 +20,7 @@ private:
         
         currRow = dupRow;
         currCol = dupCol;
+        // traversing: diagonally towards left-downward
         while(currRow < n && currCol >= 0) {
             if(board[currRow][currCol] == 1) return false;
             currRow++;
