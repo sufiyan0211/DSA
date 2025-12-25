@@ -1,31 +1,28 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
+class Solution {
+  public:
+    bool isSubsetSum(int index, int k, vector<int>& arr, int size, int sum,
+        vector<vector<int>> &dp) {
+               
+        if (index >= size) return false;
 
-bool solve(int i, int n, int k,
-           vector<int> &arr,
-           vector<vector<int>> &dp) {
-
-    if(i >= n) return false;
-    if(k == 0) return true;
-    if(k < 0) return false;
-
-    if(i == n-1) {
-        if(k-arr[i] == 0) return true;
-        else return false;
+        if(k - arr[index] == 0) return true;
+        if(dp[index][k] != -1) return dp[index][k];
+        
+        bool pick = false;
+        if(k - arr[index] >= 0) 
+            pick = isSubsetSum(index+1, k-arr[index], arr, size, sum, dp);
+        
+        bool notPick = isSubsetSum(index+1, k, arr, size, sum, dp);
+        
+        return dp[index][k] = (pick || notPick);
     }
-
-    if(dp[i][k] != -1) return dp[i][k];
-
-    bool pick = solve(i+1, n, k-arr[i], arr, dp);
-    bool notPick = solve(i+1, n, k, arr, dp);
-
-    return dp[i][k] = (pick || notPick);
-}
-
-bool subsetSumToK(int n, int k, vector<int> &arr) {
-    // Write your code here.
-    vector<vector<int>> dp(n, vector<int> (k+1, -1));
-    return solve(0, n, k, arr, dp);
-}
+    
+    bool isSubsetSum(vector<int>& arr, int sum) {
+        // code here
+        int size = arr.size();
+        
+        vector<vector<int>> dp(size, vector<int> (sum+1, -1));
+        
+        return isSubsetSum(0, sum, arr, size, sum, dp);
+    }
+};
