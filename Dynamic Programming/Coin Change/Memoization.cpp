@@ -1,23 +1,27 @@
 class Solution {
-private:
-    long long int count(int i, int value, int n, int arr[],
-    vector<vector<long long int>> &dp) {
-        if(value == 0) return 1;
-        if(i == n) {
-            if(value == 0) return 1;
-            else return 0;
+  public:
+    int count(int i, int target, vector<int>& a, vector<vector<int>> &dp) {
+        
+        if (i == 0) {
+            return (target % a[0] == 0);
         }
-        if(dp[i][value] != -1) return dp[i][value];
-        long long int include = 0;
-        if(value-arr[i] >= 0) include = count(i, value-arr[i], n, arr, dp);
-        long long int exclude = count(i+1, value, n, arr, dp);
-        return dp[i][value] = include+exclude;
+        
+        if(dp[i][target] != -1) return dp[i][target];
+        
+        int notPick = count(i-1, target, a, dp);
+        int pick = 0;
+        if(target-a[i] >= 0) pick = count(i, target-a[i], a, dp);
+        
+        return dp[i][target] = pick+notPick;
     }
-
-public:
-    long long int count(int coins[], int n, int sum) {
+    
+    
+    int count(vector<int>& coins, int sum) {
         // code here.
-        vector<vector<long long int>> dp(n, vector<long long int> (sum+1, -1));
-        return count(0, sum, n, coins, dp);
+        int n = coins.size();
+        
+        vector<vector<int>> dp(n, vector<int> (sum+1, -1));
+        
+        return count(n-1, sum, coins, dp);
     }
 };
